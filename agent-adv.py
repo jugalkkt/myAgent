@@ -20,7 +20,7 @@ def tool(description, **params):
                 "parameters": {
                     "type": "object",
                     "properties": params,
-                    "required": list(params),
+                    "required": list(params), # advantage 
                 },
             },
         }
@@ -43,7 +43,7 @@ def execute(step):
         print(f"Called {step.name}({step.arguments}) -> {answer}")
         payload = {"answer": answer}
     except Exception as e:
-        payload = {"error": str(e)}
+        payload = {"error": str(e)} # advantage
     return {
         "type": "function_result",
         "name": step.name,
@@ -60,7 +60,7 @@ while True:
         model="gemini-3.5-flash-lite",
         input=history,
         store=False,
-        tools=[t["spec"] for t in TOOLS.values()],
+        tools=[t["spec"] for t in TOOLS.values()],  # advantage
     )
     function_results = []
     for step in interaction.steps:
